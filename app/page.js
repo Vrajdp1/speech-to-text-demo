@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react';
 import { encodeWAV } from './utils/audioUtils';
 import Header from './components/header/page';
+import { AuthContextProvider } from './utils/auth-context';
 
 export default function Page() {
   const [transcription, setTranscription] = useState(""); //stores transcript
@@ -102,7 +103,7 @@ export default function Page() {
   };
 
   return (
-    <div>
+    <AuthContextProvider>
       <Header />
     
       {/* Button to start and stop recording (just for testing)*/}
@@ -116,6 +117,6 @@ export default function Page() {
 
       {/* Display the transcription result */}
       <p>{transcription}</p>
-    </div>
+    </AuthContextProvider>
   );
 }
