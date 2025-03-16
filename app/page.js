@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { encodeWAV } from './utils/audioUtils';
 import Header from './components/header/page';
 import { AuthContextProvider } from './utils/auth-context';
+import SearchBar from './searchBar/page';
 
 export default function Page() {
   const [transcription, setTranscription] = useState(""); //stores transcript
@@ -105,6 +106,8 @@ export default function Page() {
   return (
     <AuthContextProvider>
       <Header />
+    <SearchBar />
+    {/* anyone who is doing voice search go to /components/searchBar */}
     
       {/* Button to start and stop recording (just for testing)*/}
       <button
