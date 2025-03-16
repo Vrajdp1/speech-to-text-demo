@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef } from 'react';
 import { encodeWAV } from './utils/audioUtils';
+import Header from './header/page';
 
 export default function Page() {
   const [transcription, setTranscription] = useState(""); //stores transcript
@@ -102,6 +103,8 @@ export default function Page() {
 
   return (
     <div>
+      <Header />
+    
       {/* Button to start and stop recording (just for testing)*/}
       <button
         onMouseDown={startRecording}
