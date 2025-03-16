@@ -4,7 +4,7 @@ import './style.css';
 const Header = () => {
     return (
         <header>
-            <span className="logo"><a href="/">SharpDeals</a></span>
+            <span className="logo"><a href="#">SharpDeals</a></span>
 
             <nav>
                 <ul>

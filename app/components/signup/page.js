@@ -1,6 +1,21 @@
+"use client"
 import React from "react";
+import { useUserAuth} from "@/app/utils/auth-context";
+ // Adjust the import path if needed
 
-const SignUp = () => {
+ const SignUp = () => {
+
+  const {githubSignIn} = useUserAuth();
+  async function SignIn() {
+    try{
+      await githubSignIn();
+      window.location.href = "./page.js";
+    }catch(error){
+      console.log(error)
+    }
+  }
+  
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
@@ -49,9 +64,12 @@ const SignUp = () => {
         </div>
 
         {/* Google Sign-Up */}
-        <button className="w-full flex items-center justify-center border border-gray-400 p-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+        <button
+          onClick={SignIn}
+          className="w-full flex items-center justify-center border border-gray-400 p-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+        >
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Google_2015_logo.svg"
+            src="C:\Users\koti Reddy Seelam\Desktop\emerging-trends\speech-to-text-demo\app\asset\Google__G__logo.svg.png"
             alt="Google"
             className="w-5 h-5 mr-2"
           />
