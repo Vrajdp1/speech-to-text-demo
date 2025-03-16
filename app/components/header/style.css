@@ -35,22 +35,26 @@ nav ul {
     font-weight: 700;
 }
 
-nav ul li {
-    display: inline-block;
-}
-
 nav ul li a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-size: 20px;
-    padding: 10px 15px;
-    transition: 0.3s;
-    border-radius: 5px;
-    display: inline-block;
+    position: relative;
+    text-decoration: none; /* Remove default underline */
+    color: #2e2e2e;
+    font-size: 17px;
 }
 
-nav ul li a:hover {
-    background: #555;
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Adjust the distance of the underline */
+    width: 0;
+    height: 2px;
+    background-color: #9932cc; /* Match the theme color */
+    transition: width 0.3s ease-in-out;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
 }
 
 /* Authentication Buttons */
@@ -72,10 +76,6 @@ nav ul li a:hover {
     color: #000;
 }
 
-.login-btn:hover {
-    background: #9932cc;
-    color: #fff;
-}
 
 .signup-btn {
     color: #fff;

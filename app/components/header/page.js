@@ -15,8 +15,8 @@ const Header = () => {
             </nav>
 
             <div className="auth-buttons">
-                <a href="#login" className="login-btn">Login</a>
-                <a href="#signup" className="signup-btn">Sign Up</a>
+                <a href="./components/login" className="login-btn">Login</a>
+                <a href="./components/signup" className="signup-btn">Sign Up</a>
             </div>
         </header>
     );
