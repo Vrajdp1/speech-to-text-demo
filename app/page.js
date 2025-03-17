@@ -4,6 +4,7 @@ import { encodeWAV } from './utils/audioUtils';
 import Header from './components/header/page';
 import { AuthContextProvider } from './utils/auth-context';
 import SearchBar from './components/searchBar/page';
+import Footer from "./components/Footer/Page";
 
 export default function Page() {
   const [transcription, setTranscription] = useState(""); //stores transcript
@@ -117,9 +118,11 @@ export default function Page() {
       >
         Hold to Speak
       </button>
+     
 
       {/* Display the transcription result */}
       <p>{transcription}</p>
+      <Footer/>
     </AuthContextProvider>
   );
 }

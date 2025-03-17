@@ -19,14 +19,14 @@ span {
 }
 
 
-nav {
+#mainNav {
     flex-grow: 1;  /* Push nav to the center */
     display: flex;
     justify-content: left;
     margin-left: 50px;
 }
 
-nav ul {
+#mainNav ul {
     list-style: none;
     display: flex;
     gap: 20px;
@@ -35,7 +35,7 @@ nav ul {
     font-weight: 700;
 }
 
-nav ul li a {
+#mainNav ul li a {
     position: relative;
     text-decoration: none; /* Remove default underline */
     color: #2e2e2e;

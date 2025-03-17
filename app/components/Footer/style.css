@@ -1,0 +1,28 @@
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+  }
+  
+
+  
+  .auth-footer a {
+    color: #ffcc00;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  

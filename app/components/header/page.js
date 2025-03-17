@@ -41,7 +41,7 @@ const Header = () => {
         <a href="/">EchoDeals</a>
       </span>
 
-      <nav>
+      <nav id="mainNav">
         <ul>
           <li><a href="/hotdeals" onClick={navigate('/hotdeals')}>HotDeals</a></li>
           <li><a href="/budgeting" onClick={navigate('/budgeting')}>Smart Budgeting</a></li>
