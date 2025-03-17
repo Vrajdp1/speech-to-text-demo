@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <header>
       <span className="logo">
-        <a href="/" onClick={navigate('/')}>EchoDeals</a>
+        <a href="/">EchoDeals</a>
       </span>
 
       <nav>
@@ -52,7 +52,7 @@ const Header = () => {
       <div className="auth-buttons">
         {user ? (
           <div>
-            <a href="./components/myaccount/"  className="login-btn">My Account</a>
+            <a href="/components/myaccount/"  className="login-btn">My Account</a>
             <a href="#" onClick={handleSignOut} className="signup-btn">Logout</a>
           </div>
 
