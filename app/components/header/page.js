@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <header>
       <span className="logo">
-        <a href="/" onClick={navigate('/')}>SharpDeals</a>
+        <a href="/" onClick={navigate('/')}>EchoDeals</a>
       </span>
 
       <nav>

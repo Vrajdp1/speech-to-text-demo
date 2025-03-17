@@ -11,7 +11,7 @@ const SearchBar = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-4 mt-5">
-      <div className="flex items-center border rounded-full shadow-md p-4 bg-white">
+      <div className="flex items-center border rounded-full shadow-md p-4 bg-gray-200">
         <Search className="text-gray-500" />
         <input
           type="text"
