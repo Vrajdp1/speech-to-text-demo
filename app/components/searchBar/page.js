@@ -12,7 +12,7 @@ const router = useRouter();
 
   const handleSearch = (event) => {
     event.preventDefault(); // Prevent the default form submission
-    router.push(`../components/search?q=${encodeURIComponent(searchQuery)}`); // Redirect to the search page with the search query
+    router.replace(`../components/search?q=${encodeURIComponent(searchQuery)}`); // Redirect to the search page with the search query
 };
 
 

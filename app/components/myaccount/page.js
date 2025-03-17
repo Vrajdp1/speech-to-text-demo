@@ -1,13 +1,19 @@
 "use client";
 import Profile from './profile';
 import './myAccount.css';
+import Header from '../header/page';
 
 function MyAccount() {
 
   return (
-    <div className="my-account">
+    <>
+    <Header/>
+      <div className="mt-32">
+
       <Profile/>
-    </div>
+      </div>
+    </>
+    
   );
 }
 
