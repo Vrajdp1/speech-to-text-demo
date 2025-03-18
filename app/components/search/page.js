@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import AmazonResults from "@/app/api/amazonApi/page";
+import AmazonResults from "@/app/api/marketplaceApi/page";
 import Header from "@/app/components/header/page";
 import SearchBar from "../searchBar/page";
 

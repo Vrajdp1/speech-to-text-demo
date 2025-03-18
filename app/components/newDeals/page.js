@@ -1,25 +1,20 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
+import MarketplaceResults from "@/app/api/marketplaceApi/page";// API request component
 
-const NewDeals = () => {
-    const deals = [
-        { id: 1, name: 'Deal 1', description: 'Description for deal 1' },
-        { id: 2, name: 'Deal 2', description: 'Description for deal 2' },
-        { id: 3, name: 'Deal 3', description: 'Description for deal 3' },
-    ];
+export default function NewDeals() {
+  const [query, setQuery] = useState("best deals");
 
-    return (
-        <div>
-            <h1>New Deals</h1>
-            <ul>
-                {deals.map(deal => (
-                    <li key={deal.id}>
-                        <h2>{deal.name}</h2>
-                        <p>{deal.description}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-};
+  useEffect(() => {
+    setQuery("best deals");
+  }, []);
 
-export default NewDeals;
+  return (
+    <div className="p-6">
+      <h2 className="text-xl font-bold mb-4">🔥 New Deals</h2>
+
+      {/* ✅ Using cardType="newDeals" to display NewDealsProductCard */}
+      <MarketplaceResults query={query} cardType="newDeals" limit={12} />
+    </div>
+  );
+}

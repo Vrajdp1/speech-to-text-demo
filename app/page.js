@@ -5,6 +5,7 @@ import Header from './components/header/page';
 import { AuthContextProvider } from './utils/auth-context';
 import SearchBar from './components/searchBar/page';
 import Footer from "./components/Footer/Page";
+import NewDeals from './components/newDeals/page';
 
 export default function Page() {
   const [transcription, setTranscription] = useState(""); //stores transcript
@@ -122,6 +123,7 @@ export default function Page() {
 
       {/* Display the transcription result */}
       <p>{transcription}</p>
+      <NewDeals/>
       <Footer/>
     </AuthContextProvider>
   );

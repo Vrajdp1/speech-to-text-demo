@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
-import { Heart, Star } from "lucide-react";
-import { Card, CardContent } from "@/ui/card";
-import { Button } from "@/ui/button";
+
+const marketplaceLogos = {
+  Amazon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+  Walmart: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg",
+};
 
 const ProductCard = ({products}) => {
-  const [isFavorited, setIsFavorited] = useState(false);
 
   return (
 <main className="p-6">
@@ -31,12 +31,24 @@ const ProductCard = ({products}) => {
                   List Price: ${product.list_price}
                 </p>
               )}
-              <p className="text-yellow-500">⭐ {product.rating} / 5</p>
+              <p className="text-yellow-500">Rating: ⭐ {product.rating} / 5</p>
               {product.retailer_badge && (
                 <p className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded inline-block mt-2">
                   {product.retailer_badge}
                 </p>
               )}
+
+{/* ✅ Marketplace Logo */}
+{product.platform && (
+                <div className="flex items-center gap-2 mt-2">
+                  <img
+                    src={marketplaceLogos[product.platform]}
+                    alt={product.platform}
+                    className="h-6 w-auto"
+                  />
+     </div>
+              )}
+
               {product.is_prime && (
                 <p className="text-sm text-purple-600 font-semibold">✅ Prime Available</p>
               )}
