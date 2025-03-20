@@ -17,6 +17,11 @@ export default function Page() {
   //records audio from users mic
   const startRecording = async () => {
     try {
+
+      //clears previous transcription and audio
+      setTranscription("");
+      audioChunksRef.current = [];
+
       // Request access to the user's microphone
       streamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
 
