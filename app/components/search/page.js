@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import AmazonResults from "@/app/api/marketplaceApi/page";
 import Header from "@/app/components/header/page";
 import SearchBar from "../searchBar/page";
+import Footer from "@/app/components/Footer/Page";
 
 const SearchResults = () => {
   const searchParams = useSearchParams();
@@ -18,7 +19,8 @@ const SearchResults = () => {
     <>
       <Header />
       <SearchBar />
-      <AmazonResults query={searchQuery} />
+      <AmazonResults query={searchQuery} limit={50} platform="both" />
+      <Footer />
     </>
   );
 };

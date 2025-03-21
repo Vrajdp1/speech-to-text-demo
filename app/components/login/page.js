@@ -61,8 +61,7 @@ const Login = () => {
           Don't have an account?<a href="./signup"><span className="sign-up-link">Sign up</span></a>
         </p>
         <div className="buttons-container">
-          <div className="google-login-button"    onClick={() => {
-              handleGoogleSignIn();}}>
+          <div className="google-login-button"  onClick={() => {handleGoogleSignIn();}}>
             <svg stroke="currentColor" fill="currentColor" strokeWidth={0} version="1.1" x="0px" y="0px" className="google-icon" viewBox="0 0 48 48" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
               <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
       	c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24

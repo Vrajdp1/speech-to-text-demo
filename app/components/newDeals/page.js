@@ -11,7 +11,7 @@ export default function NewDeals() {
 
   return (
     <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">🔥 New Deals</h2>
+      <h2 className="text-2xl font-bold mb-4 m-5">New Deals</h2>
 
       {/* ✅ Using cardType="newDeals" to display NewDealsProductCard */}
       <MarketplaceResults query={query} cardType="newDeals" limit={12} />

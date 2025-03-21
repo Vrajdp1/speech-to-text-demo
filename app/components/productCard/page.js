@@ -3,6 +3,9 @@
 const marketplaceLogos = {
   Amazon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
   Walmart: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg",
+  Costco: "https://companieslogo.com/img/orig/COST_BIG-8d2fd259.png",
+  HomeDepot: "https://companieslogo.com/img/orig/HD-c2e64c95.png",
+  BestBuy: "https://companieslogo.com/img/orig/BBY_BIG-91ae3bf2.png",
 };
 
 const ProductCard = ({products}) => {

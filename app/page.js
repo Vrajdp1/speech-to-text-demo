@@ -6,7 +6,7 @@ import { AuthContextProvider } from './utils/auth-context';
 import SearchBar from './components/searchBar/page';
 import Footer from "./components/Footer/Page";
 import NewDeals from './components/newDeals/page';
-
+import RetailCards from './components/shopByBrand/page';
 export default function Page() {
   const [transcription, setTranscription] = useState(""); //stores transcript
   const recorderRef = useRef(null); //media recorder instance
@@ -124,6 +124,7 @@ export default function Page() {
       {/* Display the transcription result */}
       <p>{transcription}</p>
       <NewDeals/>
+      <RetailCards/>
       <Footer/>
     </AuthContextProvider>
   );

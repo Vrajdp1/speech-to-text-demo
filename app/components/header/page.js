@@ -43,7 +43,7 @@ const Header = () => {
 
       <nav id="mainNav">
         <ul>
-          <li><a href="/hotdeals" onClick={navigate('/hotdeals')}>HotDeals</a></li>
+          <li><a href="./hotdeals">HotDeals</a></li>
           <li><a href="/budgeting" onClick={navigate('/budgeting')}>Smart Budgeting</a></li>
           <li><a href="/shop" onClick={navigate('/shop')}>Shop with Friend</a></li>
         </ul>
