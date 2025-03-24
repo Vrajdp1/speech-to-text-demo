@@ -8,10 +8,10 @@ import { AuthContextProvider } from '@/app/utils/auth-context';
 import MarketplaceResults from '@/app/api/marketplaceApi/page';
 
 const costcoPage = () => {
-     const [query, setQuery] = useState("trending");
+     const [query, setQuery] = useState("home");
     
       useEffect(() => {
-        setQuery("trending");
+        setQuery("home");
       }, []);
     return (
         <>

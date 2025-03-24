@@ -43,7 +43,7 @@ const Header = () => {
 
       <nav id="mainNav">
         <ul>
-          <li><a href="./hotdeals">HotDeals</a></li>
+          <li><a href="/hotdeals">HotDeals</a></li>
           <li><a href="/budgeting" onClick={navigate('/budgeting')}>Smart Budgeting</a></li>
           <li><a href="/shop" onClick={navigate('/shop')}>Shop with Friend</a></li>
         </ul>
@@ -58,8 +58,8 @@ const Header = () => {
 
   ) : (
           <>
-            <a href="./components/login/"  className="login-btn">Login</a>
-            <a href="./components/signup"  className="signup-btn">Sign Up</a>
+            <a href="/components/login/"  className="login-btn">Login</a>
+            <a href="/components/signup"  className="signup-btn">Sign Up</a>
           </>
         )}
       </div>

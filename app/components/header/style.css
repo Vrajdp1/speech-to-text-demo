@@ -7,7 +7,7 @@ header {
     width: 100%;
 }
 
-span {
+.logo {
     font-size: 22px;
     color: #ffffff;
     font-weight: 700;
