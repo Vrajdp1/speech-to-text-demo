@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useUserAuth } from '@/app/utils/auth-context';
 import './style.css';
+import Link from 'next/link';
+
 
 const Header = () => {
   const { user, firebaseSignOut } = useUserAuth();
@@ -44,7 +46,10 @@ const Header = () => {
       <nav id="mainNav">
         <ul>
           <li><a href="/hotdeals">HotDeals</a></li>
-          <li><a href="/budgeting" onClick={navigate('/budgeting')}>Smart Budgeting</a></li>
+          <li>
+  <Link href="/budgeting">Smart Budgeting</Link>
+</li>
+
           <li><a href="/shop" onClick={navigate('/shop')}>Shop with Friend</a></li>
         </ul>
       </nav>
