@@ -14,13 +14,7 @@ export default function Page() {
     <AuthContextProvider>
       <Header />
     <SearchBar />
-    {/* anyone who is doing voice search go to /components/searchBar */}
-
-      {/* Button to start and stop recording (just for testing)*/}
-     
-
- 
-      <NewDeals/>
+     <NewDeals/>
       <RetailCards/>
       <Footer/>
     </AuthContextProvider>

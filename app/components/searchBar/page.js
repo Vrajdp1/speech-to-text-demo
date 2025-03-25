@@ -174,6 +174,8 @@ const SearchBar = () => {
                 </span>
               )}
           </p>
+           {/* Display the transcription result */}
+       <p>{transcription}</p>
 
           <button
             onClick={() => {
