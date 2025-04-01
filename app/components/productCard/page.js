@@ -3,7 +3,7 @@
 const marketplaceLogos = {
   Amazon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
   Walmart: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg",
-  Costco: "https://companieslogo.com/img/orig/COST_BIG-8d2fd259.png",
+  // Costco: "https://companieslogo.com/img/orig/COST_BIG-8d2fd259.png",
 };
 
 const ProductCard = ({ products }) => {

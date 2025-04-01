@@ -50,16 +50,11 @@ const Header = () => {
       <nav id="mainNav">
         <ul>
           <li><a href="/hotdeals">HotDeals</a></li>
-<<<<<<< HEAD
-          <li><a href="/budgeting">Smart Budgeting</a></li>
-          <li><a href="/shop">Shop with Friend</a></li>
-=======
           <li>
   <Link href="/budgeting">Smart Budgeting</Link>
 </li>
 
           <li><a href="/shop" onClick={navigate('/shop')}>Shop with Friend</a></li>
->>>>>>> fc63cfb606f7321d8cf68d9babcd0e2808b86540
         </ul>
       </nav>
 

@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef } from 'react';
-import { encodeWAV } from './utils/audioUtils';
+import { encodeWAV } from './utils/formidableParser';
 import Header from './components/header/page';
 import { AuthContextProvider } from './utils/auth-context';
 import SearchBar from './components/searchBar/page';

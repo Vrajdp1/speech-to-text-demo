@@ -26,7 +26,7 @@ const RetailCards = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Shop by Brand</h2>
+      <h2 className="text-2xl font-bold mb-4">Shop by Store</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
         {retailers.map((retailer, index) => (
           <InfoCard key={index} imageSrc={retailer.imageSrc} altText={retailer.altText} link={retailer.link} />
