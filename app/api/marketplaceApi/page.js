@@ -16,7 +16,7 @@ export default function MarketplaceResults({
   const [loading, setLoading] = useState(false);
   const [retryTrigger, setRetryTrigger] = useState(0);
 
-  const ApiKey = "your_unwrangle_api_key";
+  const ApiKey = "de897fe11c7b2e4f5cd640c1b3597e4b341ad053";
 
   const localFallbackRank = (products) => {
     return [...products].sort((a, b) => {
@@ -26,10 +26,26 @@ export default function MarketplaceResults({
       return score(b, discountB) - score(a, discountA);
     });
   };
+  const cleanProductsForGPT = (products) => {
+    return products.map((p) => ({
+      name: p.name,
+      price: p.price ?? null,
+      list_price: p.list_price ?? null,
+      rating: p.rating ?? null,
+      total_ratings: p.total_ratings ?? null,
+      thumbnail: p.thumbnail ?? null,
+      url: p.url ?? null,
+      platform: p.platform ?? "Unknown",
+      retailer_badge: p.retailer_badge ?? null,
+      is_prime: p.is_prime ?? false,
+      shipping_info: p.shipping_info?.[0] ?? null,
+    }));
+  };
+  
 
   const fetchGeminiRankedProducts = async (searchQuery, combinedProducts) => {
     try {
-      const response = await fetch("http://localhost:5000/search", {
+      const response = await fetch("/api/rankingengine", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: searchQuery, products: combinedProducts }),
@@ -44,6 +60,7 @@ export default function MarketplaceResults({
       return data.deals || [];
     } catch (error) {
       toast.error("⚠️ Gemini failed. Using local fallback ranking.");
+      
       return localFallbackRank(combinedProducts);
     }
   };
@@ -76,13 +93,16 @@ export default function MarketplaceResults({
             try {
               const res = await fetch(endpoints[platformKey]);
               const data = await res.json();
+        
               return data.success && data.results
-                ? data.results.map((p) => ({
-                    ...p,
-                    platform:
-                      platformKey.charAt(0).toUpperCase() +
-                      platformKey.slice(1),
-                  }))
+                ? data.results
+                    .slice(0, 10) // ✅ LIMIT TO 10 PER PLATFORM
+                    .map((p) => ({
+                      ...p,
+                      platform:
+                        platformKey.charAt(0).toUpperCase() +
+                        platformKey.slice(1),
+                    }))
                 : [];
             } catch (err) {
               console.error(`Fetch failed for ${platformKey}:`, err);
@@ -90,16 +110,17 @@ export default function MarketplaceResults({
             }
           })
         );
+        
 
         const combinedProducts = results.flat();
-
+const cleanedProducts = cleanProductsForGPT(combinedProducts);
         if (combinedProducts.length === 0) {
           toast("No products found.");
           setFullProducts([]);
         } else {
           const ranked = await fetchGeminiRankedProducts(
             searchQuery,
-            combinedProducts
+            cleanedProducts
           );
           setFullProducts(ranked);
         }

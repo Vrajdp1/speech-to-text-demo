@@ -19,7 +19,7 @@ const SearchResults = () => {
     <>
       <Header />
       <SearchBar />
-      <AmazonResults query={searchQuery} limit={50} platform="both" />
+      <AmazonResults query={searchQuery} limit={40} platform="both" />
       <Footer />
     </>
   );
