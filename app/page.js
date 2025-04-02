@@ -15,6 +15,7 @@ export default function Page() {
       <Header />
     <SearchBar />
      <NewDeals/>
+
       <RetailCards/>
       <Footer/>
     </AuthContextProvider>

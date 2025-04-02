@@ -18,16 +18,8 @@ export default function MarketplaceResults({
 
   const ApiKey = "de897fe11c7b2e4f5cd640c1b3597e4b341ad053";
 
-  const localFallbackRank = (products) => {
-    return [...products].sort((a, b) => {
-      const discountA = (a.list_price || a.price) - a.price;
-      const discountB = (b.list_price || b.price) - b.price;
-      const score = (p, d) => d * 0.5 + (p.rating || 0) * 10 - (p.price || 0);
-      return score(b, discountB) - score(a, discountA);
-    });
-  };
-  const cleanProductsForGPT = (products) => {
-    return products.map((p) => ({
+  const cleanProductsForGPT = (products) =>
+    products.map((p) => ({
       name: p.name,
       price: p.price ?? null,
       list_price: p.list_price ?? null,
@@ -40,28 +32,31 @@ export default function MarketplaceResults({
       is_prime: p.is_prime ?? false,
       shipping_info: p.shipping_info?.[0] ?? null,
     }));
-  };
-  
 
-  const fetchGeminiRankedProducts = async (searchQuery, combinedProducts) => {
+  const localFallbackRank = (products) => {
+    return [...products].sort((a, b) => {
+      const discountA = (a.list_price || a.price) - a.price;
+      const discountB = (b.list_price || b.price) - b.price;
+      const score = (p, d) => d * 0.5 + (p.rating || 0) * 10 - (p.price || 0);
+      return score(b, discountB) - score(a, discountA);
+    });
+  };
+
+  const fetchGeminiRankedProducts = async (searchQuery, products) => {
     try {
       const response = await fetch("/api/rankingengine", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: searchQuery, products: combinedProducts }),
+        body: JSON.stringify({ query: searchQuery, products }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData?.error || "Unknown Gemini error");
-      }
+      if (!response.ok) throw new Error((await response.json())?.error);
 
       const data = await response.json();
       return data.deals || [];
     } catch (error) {
-      toast.error("⚠️ Gemini failed. Using local fallback ranking.");
-      
-      return localFallbackRank(combinedProducts);
+      toast.error("⚠️ Gemini failed. Using fallback ranking.");
+      return localFallbackRank(products);
     }
   };
 
@@ -73,59 +68,38 @@ export default function MarketplaceResults({
       setLoading(true);
 
       const endpoints = {
-        amazon: `https://data.unwrangle.com/api/getter/?platform=amazon_search&search=${encodeURIComponent(
-          searchQuery
-        )}&country_code=us&api_key=${ApiKey}`,
-        walmart: `https://data.unwrangle.com/api/getter/?platform=walmart_search&search=${encodeURIComponent(
-          searchQuery
-        )}&country_code=us&api_key=${ApiKey}`,
-        // costco: `https://data.unwrangle.com/api/getter/?platform=costco_search&search=${encodeURIComponent(
-        //   searchQuery
-        // )}&country_code=us&api_key=${ApiKey}`,
+        amazon: `https://data.unwrangle.com/api/getter/?platform=amazon_search&search=${encodeURIComponent(searchQuery)}&country_code=us&api_key=${ApiKey}`,
+        walmart: `https://data.unwrangle.com/api/getter/?platform=walmart_search&search=${encodeURIComponent(searchQuery)}&country_code=us&api_key=${ApiKey}`,
       };
 
-      const platformsToFetch =
-        platform === "both" ? ["amazon", "walmart"] : [platform];
+      const platformsToFetch = platform === "both" ? ["amazon", "walmart"] : [platform];
 
       try {
         const results = await Promise.all(
           platformsToFetch.map(async (platformKey) => {
-            try {
-              const res = await fetch(endpoints[platformKey]);
-              const data = await res.json();
-        
-              return data.success && data.results
-                ? data.results
-                    .slice(0, 10) // ✅ LIMIT TO 10 PER PLATFORM
-                    .map((p) => ({
-                      ...p,
-                      platform:
-                        platformKey.charAt(0).toUpperCase() +
-                        platformKey.slice(1),
-                    }))
-                : [];
-            } catch (err) {
-              console.error(`Fetch failed for ${platformKey}:`, err);
-              return [];
-            }
+            const res = await fetch(endpoints[platformKey]);
+            const data = await res.json();
+            return data.success && data.results
+              ? data.results.slice(0, 20).map((p) => ({
+                  ...p,
+                  platform: platformKey.charAt(0).toUpperCase() + platformKey.slice(1),
+                }))
+              : [];
           })
         );
-        
 
         const combinedProducts = results.flat();
-const cleanedProducts = cleanProductsForGPT(combinedProducts);
         if (combinedProducts.length === 0) {
           toast("No products found.");
           setFullProducts([]);
         } else {
-          const ranked = await fetchGeminiRankedProducts(
-            searchQuery,
-            cleanedProducts
-          );
+          const cleaned = cleanProductsForGPT(combinedProducts);
+          const ranked = await fetchGeminiRankedProducts(searchQuery, cleaned);
           setFullProducts(ranked);
         }
       } catch (err) {
-        toast.error("Something went wrong. Please try again.");
+        console.error("❌ Fetching failed:", err);
+        toast.error("Something went wrong.");
       }
 
       setLoading(false);
@@ -143,16 +117,10 @@ const cleanedProducts = cleanProductsForGPT(combinedProducts);
     <>
       <Toaster />
 
-      <div
-        className={`transition-opacity duration-500 ease-in-out ${
-          loading ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-      >
+      <div className={`transition-opacity duration-300 ease-in-out ${loading ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         {displayedProducts.length === 0 && !loading ? (
           <div className="text-center mt-8">
-            <p className="text-gray-600 mb-4">
-              No products found or ranking failed.
-            </p>
+            <p className="text-gray-600 mb-4">No products found or ranking failed.</p>
             <button
               className="px-4 py-2 bg-blue-600 text-white rounded"
               onClick={() => setRetryTrigger((prev) => prev + 1)}
@@ -168,7 +136,7 @@ const cleanedProducts = cleanProductsForGPT(combinedProducts);
       </div>
 
       {loading && (
-        <div className="flex justify-center items-center h-80 transition-opacity duration-300 ease-in-out opacity-100">
+        <div className="flex justify-center items-center h-80 transition-opacity duration-200 ease-in-out opacity-100">
           <Loader />
         </div>
       )}
